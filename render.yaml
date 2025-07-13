@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: crud-app
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: crud-app-db
+          property: connectionString
+
+databases:
+  - name: crud-app-db
+    plan: free
+    databaseName: crud_db
+    user: crud_user
